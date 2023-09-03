@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  application:
+    container_name: cyprusbot
+    image: 'cyprusbot'
+    build:
+      context: .
+    depends_on:
+      - database
+    env_file: environment.env
+    ports:
+      - "80:80"
+    networks:
+      - "default"
+
+  database:
+    container_name: postgres
+    image: postgres:14-alpine3.18
+    build:
+      context: .
+    env_file: environment.env
+    volumes:
+      - /home/BCDTravelAgency/pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    networks:
+      - default

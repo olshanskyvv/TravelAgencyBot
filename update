@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+git fetch
+git pull
+
+cd dvgKiprBot || return
+
+docker compose down
+docker system prune -a
+
+docker compose up
+
+cd ..
